@@ -6,21 +6,25 @@ import Icon from "@/components/ui/icon";
 const GuidePage = () => {
   const steps = [
     {
+      number: 1,
       title: "Выберите подарочную карту",
       description: "Выберите желаемый номинал подарочной карты в нашем каталоге.",
       icon: "GiftIcon"
     },
     {
+      number: 2,
       title: "Оплатите заказ",
       description: "Оплатите заказ любым удобным для вас способом: банковской картой, электронным кошельком и т.д.",
       icon: "CreditCard"
     },
     {
+      number: 3,
       title: "Получите код активации",
       description: "После оплаты вы получите код активации на указанный email или в личном кабинете.",
       icon: "Mail"
     },
     {
+      number: 4,
       title: "Активируйте карту",
       description: "Активируйте подарочную карту в App Store, используя полученный код активации.",
       icon: "CheckCircle"
@@ -29,14 +33,17 @@ const GuidePage = () => {
 
   const usageInstructions = [
     {
+      number: 1,
       title: "Активация в App Store",
       description: "Откройте App Store на своем устройстве Apple. Нажмите на свою учетную запись в правом верхнем углу, выберите 'Пополнить счет' и введите код."
     },
     {
+      number: 2,
       title: "Активация на сайте Apple",
       description: "Перейдите на сайт apple.com/redeem, войдите в свою учетную запись Apple ID и введите код активации."
     },
     {
+      number: 3,
       title: "Активация через iTunes",
       description: "Откройте iTunes на компьютере, войдите в свою учетную запись и выберите 'Пополнить' в разделе 'Учетная запись'. Введите код активации."
     }
@@ -85,7 +92,10 @@ const GuidePage = () => {
               {steps.map((step, index) => (
                 <Card key={index} className="border-0 shadow-sm">
                   <CardContent className="p-6 flex flex-col items-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center mb-4 relative">
+                      <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
+                        {step.number}
+                      </span>
                       <Icon name={step.icon} size={24} />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
@@ -102,7 +112,10 @@ const GuidePage = () => {
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6 space-y-6">
                 {usageInstructions.map((instruction, index) => (
-                  <div key={index}>
+                  <div key={index} className="relative pl-8">
+                    <span className="absolute left-0 top-0 w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
+                      {instruction.number}
+                    </span>
                     <h3 className="text-lg font-semibold mb-2">{instruction.title}</h3>
                     <p className="text-gray-600">{instruction.description}</p>
                     {index < usageInstructions.length - 1 && <Separator className="my-4" />}
