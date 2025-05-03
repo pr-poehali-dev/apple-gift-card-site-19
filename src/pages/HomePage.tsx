@@ -2,8 +2,30 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import Icon from "@/components/ui/icon";
 
 const HomePage = () => {
+  const giftCardData = [
+    {
+      value: 1000,
+      icon: "Gift",
+      color: "text-blue-500",
+      description: "Подарочная карта Apple Store номиналом 1000 рублей"
+    },
+    {
+      value: 2500,
+      icon: "ShoppingBag",
+      color: "text-purple-500",
+      description: "Подарочная карта Apple Store номиналом 2500 рублей"
+    },
+    {
+      value: 5000,
+      icon: "CreditCard",
+      color: "text-pink-500",
+      description: "Подарочная карта Apple Store номиналом 5000 рублей"
+    }
+  ];
+
   return (
     <div className="flex flex-col min-h-screen bg-[#f5f5f7]">
       {/* Навигация */}
@@ -52,22 +74,27 @@ const HomePage = () => {
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl font-bold text-center mb-12">Доступные номиналы</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1000, 2500, 5000].map((value) => (
-              <Card key={value} className="border-0 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+            {giftCardData.map((card) => (
+              <Card key={card.value} className="border-0 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
                 <CardContent className="p-6 flex flex-col items-center">
                   <div className="w-40 h-32 mb-6 flex items-center justify-center">
-                    <img 
-                      src={`https://images.unsplash.com/photo-1607083206968-13611e3d76db?q=80&w=300&auto=format&fit=crop`} 
-                      alt={`Apple Gift Card ${value} руб.`} 
-                      className="w-full h-full object-contain"
-                    />
+                    <div className="flex flex-col items-center">
+                      <div className={`w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-2 ${card.color}`}>
+                        <Icon name={card.icon} size={32} />
+                      </div>
+                      <img 
+                        src={`https://images.unsplash.com/photo-1607083206968-13611e3d76db?q=80&w=300&auto=format&fit=crop`} 
+                        alt={`Apple Gift Card ${card.value} руб.`} 
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-semibold mb-2">{value} ₽</h3>
+                  <h3 className="text-2xl font-semibold mb-2">{card.value} ₽</h3>
                   <p className="text-gray-600 text-center mb-6">
-                    Подарочная карта Apple Store номиналом {value} рублей
+                    {card.description}
                   </p>
                   <Button asChild variant="outline" className="rounded-full w-full">
-                    <Link to={`/products#card-${value}`}>Подробнее</Link>
+                    <Link to={`/products#card-${card.value}`}>Подробнее</Link>
                   </Button>
                 </CardContent>
               </Card>
