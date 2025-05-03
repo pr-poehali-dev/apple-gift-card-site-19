@@ -2,6 +2,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Icon from "@/components/ui/icon";
+import { 
+  Accordion, 
+  AccordionContent, 
+  AccordionItem, 
+  AccordionTrigger 
+} from "@/components/ui/accordion";
 
 const GuidePage = () => {
   const steps = [
@@ -129,14 +135,19 @@ const GuidePage = () => {
           <section>
             <h2 className="text-2xl font-bold mb-6">Часто задаваемые вопросы</h2>
             <Card className="border-0 shadow-sm">
-              <CardContent className="p-6 space-y-6">
-                {faqItems.map((item, index) => (
-                  <div key={index}>
-                    <h3 className="text-lg font-semibold mb-2">{item.question}</h3>
-                    <p className="text-gray-600">{item.answer}</p>
-                    {index < faqItems.length - 1 && <Separator className="my-4" />}
-                  </div>
-                ))}
+              <CardContent className="p-6">
+                <Accordion type="single" collapsible className="w-full">
+                  {faqItems.map((item, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-lg font-semibold text-left">
+                        {item.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-gray-600">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </CardContent>
             </Card>
           </section>
